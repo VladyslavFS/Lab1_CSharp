@@ -115,43 +115,48 @@ namespace Lab1
             panel1.Invalidate();  // Оновлення панелі після очищення
         }
 
-        // Метод для розрахунку перетину прямокутника і кола
-        private double CalculateIntersectionArea()
+        private double CalculateIntersectionPercentage()
         {
             if (P1 != null && P2 != null && P3 != null && radius > 0)
             {
                 var rect = GetRectangleFromPoints(P1.Value, P2.Value);
+                double rectArea = (rect.Right - rect.Left) * (rect.Bottom - rect.Top);
 
-                // Центр кола
-                float circleX = P3.Value.X;
-                float circleY = P3.Value.Y;
+                double intersectionArea = CalculateIntersectionArea(rect, P3.Value, radius);
 
-                // Точність розрахунку (кількість частинок на одиницю площі)
-                int gridResolution = 1000;
-                double totalArea = 0;
-                double stepX = (rect.Right - rect.Left) / (double)gridResolution;
-                double stepY = (rect.Bottom - rect.Top) / (double)gridResolution;
-
-                for (double x = rect.Left; x <= rect.Right; x += stepX)
+                // Перевіряємо, чи площа прямокутника не нульова
+                if (rectArea > 0)
                 {
-                    for (double y = rect.Top; y <= rect.Bottom; y += stepY)
-                    {
-                        // Перевіряємо, чи точка (x, y) знаходиться всередині кола
-                        double dx = x - circleX;
-                        double dy = y - circleY;
-                        double distanceSquared = dx * dx + dy * dy;
-
-                        if (distanceSquared <= radius * radius)
-                        {
-                            // Якщо точка в колі, додаємо її площу до загальної площі
-                            totalArea += stepX * stepY;
-                        }
-                    }
+                    double intersectionPercentage = (intersectionArea / rectArea) * 100;
+                    return intersectionPercentage;
                 }
-
-                return totalArea;
             }
             return 0;
+        }
+        // Метод для розрахунку перетину прямокутника і кола
+        private double CalculateIntersectionArea(RectangleF rect, PointF circleCenter, float radius)
+        {
+            double totalArea = 0;
+            int gridResolution = 1000;
+            double stepX = (rect.Right - rect.Left) / (double)gridResolution;
+            double stepY = (rect.Bottom - rect.Top) / (double)gridResolution;
+
+            for (double x = rect.Left; x <= rect.Right; x += stepX)
+            {
+                for (double y = rect.Top; y <= rect.Bottom; y += stepY)
+                {
+                    double dx = x - circleCenter.X;
+                    double dy = y - circleCenter.Y;
+                    double distanceSquared = dx * dx + dy * dy;
+
+                    if (distanceSquared <= radius * radius)
+                    {
+                        totalArea += stepX * stepY;
+                    }
+                }
+            }
+
+            return totalArea;
         }
 
         // Метод для перетворення точок P1 і P2 у прямокутник
@@ -171,14 +176,14 @@ namespace Lab1
             {
                 radius = r;
                 panel1.Invalidate();  // Оновлення панелі для малювання кола
-                CalculateIntersectionArea();  // Підрахунок площі перетину
+                CalculateIntersectionPercentage();  // Підрахунок площі перетину
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            double intersectionArea = CalculateIntersectionArea();
-            label1.Text = $"Площа перетину: {intersectionArea:F2}";
+            double intersectionArea = CalculateIntersectionPercentage();
+            label1.Text = $"Площа перетину(%): {intersectionArea:F2}";
         }
     }
 }
