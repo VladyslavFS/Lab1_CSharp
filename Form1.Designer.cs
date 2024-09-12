@@ -4,39 +4,87 @@
     {
         private Panel panel1;
         private Button button1;
+        private TextBox textBox1;
+        private Label label1;
 
         private void InitializeComponent()
         {
-            this.panel1 = new Panel();
-            this.button1 = new Button();
-            this.SuspendLayout();
+            panel1 = new Panel();
+            button1 = new Button();
+            textBox1 = new TextBox();
+            label1 = new Label();
+            button2 = new Button();
+            label2 = new Label();
+            SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 376);
-            this.panel1.TabIndex = 0;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(800, 376);
+            panel1.TabIndex = 0;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(283, 395);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(228, 43);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Очистити точки";
-            this.button1.UseVisualStyleBackColor = true;
+            button1.Location = new Point(675, 395);
+            button1.Name = "button1";
+            button1.Size = new Size(113, 43);
+            button1.TabIndex = 1;
+            button1.Text = "Очистити";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(12, 406);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(100, 23);
+            textBox1.TabIndex = 2;
+            textBox1.TextChanged += SetRadius;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(294, 424);
+            label1.Name = "label1";
+            label1.Size = new Size(107, 15);
+            label1.TabIndex = 3;
+            label1.Text = "Площа перетину: ";
+            // 
+            // button2
+            // 
+            button2.Location = new Point(283, 386);
+            button2.Name = "button2";
+            button2.Size = new Size(195, 35);
+            button2.TabIndex = 4;
+            button2.Text = "Обчислити площу перетину";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 386);
+            label2.Name = "label2";
+            label2.Size = new Size(76, 15);
+            label2.TabIndex = 5;
+            label2.Text = "Радіус кола: ";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.panel1);
-            this.Name = "Form1";
-            this.Text = "Coordinate Grid App";
-            this.ResumeLayout(false);
+            ClientSize = new Size(800, 450);
+            Controls.Add(label2);
+            Controls.Add(button2);
+            Controls.Add(textBox1);
+            Controls.Add(label1);
+            Controls.Add(button1);
+            Controls.Add(panel1);
+            Name = "Form1";
+            Text = "Coordinate System";
+            ResumeLayout(false);
+            PerformLayout();
         }
+
+        private Button button2;
+        private Label label2;
     }
 }
