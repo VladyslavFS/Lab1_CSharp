@@ -13,7 +13,6 @@
             button1 = new Button();
             textBox1 = new TextBox();
             label1 = new Label();
-            button2 = new Button();
             label2 = new Label();
             SuspendLayout();
             // 
@@ -44,21 +43,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(294, 424);
+            label1.Location = new Point(262, 406);
             label1.Name = "label1";
             label1.Size = new Size(107, 15);
             label1.TabIndex = 3;
             label1.Text = "Площа перетину: ";
-            // 
-            // button2
-            // 
-            button2.Location = new Point(283, 386);
-            button2.Name = "button2";
-            button2.Size = new Size(195, 35);
-            button2.TabIndex = 4;
-            button2.Text = "Обчислити площу перетину";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
             // 
             // label2
             // 
@@ -73,7 +62,6 @@
             // 
             ClientSize = new Size(800, 450);
             Controls.Add(label2);
-            Controls.Add(button2);
             Controls.Add(textBox1);
             Controls.Add(label1);
             Controls.Add(button1);
@@ -84,7 +72,6 @@
             PerformLayout();
         }
 
-        private Button button2;
         private Label label2;
     }
 }
